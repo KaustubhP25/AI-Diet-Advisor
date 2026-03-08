@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Diet Advisor</title>
+</head>
+
+<body>
+
+<h2>AI Diet Advisor</h2>
+
+<input id="age" placeholder="Age"><br><br>
+<input id="weight" placeholder="Weight"><br><br>
+
+<select id="goal">
+<option>Lose Weight</option>
+<option>Gain Muscle</option>
+<option>Maintain</option>
+</select>
+
+<br><br>
+
+<textarea id="food" placeholder="Food eaten today"></textarea>
+
+<br><br>
+
+<button onclick="analyze()">Analyze</button>
+
+<pre id="result"></pre>
+
+<script>
+async function analyze(){
+
+const data={
+age:document.getElementById("age").value,
+weight:document.getElementById("weight").value,
+goal:document.getElementById("goal").value,
+food:document.getElementById("food").value
+}
+
+const res=await fetch("https://zlecfce3s2.execute-api.us-east-1.amazonaws.com/analyze",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+})
+
+const text=await res.text()
+
+document.getElementById("result").innerText=text
+}
+</script>
+
+</body>
+</html>
