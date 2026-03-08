@@ -1,53 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>AI Diet Advisor</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-<h2>AI Diet Advisor</h2>
+<div class="container">
 
-<input id="age" placeholder="Age"><br><br>
-<input id="weight" placeholder="Weight"><br><br>
+<h1>🥗 AI Diet Advisor</h1>
+<p class="subtitle">Smart calorie analysis using AI</p>
+
+<div class="card">
+
+<input id="age" type="number" placeholder="Age">
+
+<input id="weight" type="number" placeholder="Weight (kg)">
 
 <select id="goal">
-<option>Lose Weight</option>
-<option>Gain Muscle</option>
-<option>Maintain</option>
+<option value="lose weight">Lose Weight</option>
+<option value="maintain weight">Maintain Weight</option>
+<option value="gain muscle">Gain Muscle</option>
 </select>
 
-<br><br>
+<textarea id="food" placeholder="Example: 2 eggs, rice, dal, chicken curry"></textarea>
 
-<textarea id="food" placeholder="Food eaten today"></textarea>
+<button onclick="analyze()">Analyze Diet</button>
 
-<br><br>
+</div>
 
-<button onclick="analyze()">Analyze</button>
+<div id="result"></div>
 
-<pre id="result"></pre>
+</div>
 
-<script>
-async function analyze(){
-
-const data={
-age:document.getElementById("age").value,
-weight:document.getElementById("weight").value,
-goal:document.getElementById("goal").value,
-food:document.getElementById("food").value
-}
-
-const res=await fetch("https://zlecfce3s2.execute-api.us-east-1.amazonaws.com/analyze",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(data)
-})
-
-const text=await res.text()
-
-document.getElementById("result").innerText=text
-}
-</script>
+<script src="/js/app.js"></script>
 
 </body>
 </html>
